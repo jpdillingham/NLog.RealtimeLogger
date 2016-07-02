@@ -104,4 +104,4 @@ The variable ```logHistoryLimit``` is used to initialize the value of the ```Log
 
 # Notes
 
-If the ```async``` option is used for NLog targets, the log event will not fire precisely in real time.  It would be a good idea to use the ```AsyncWrapper``` functionality described [here](https://github.com/nlog/NLog/wiki/AsyncWrapper-target) to limit the asynchronous execution to only those targets that need it.
+If the ```async``` option is used for the logging target the log event will not fire precisely in real time.  It would be a good idea to use the ```AsyncWrapper``` functionality described [here](https://github.com/nlog/NLog/wiki/AsyncWrapper-target) to limit the asynchronous execution to only those targets that need it, rather than adding the ```async``` attribute to the ```<targets>``` node of the config file.
