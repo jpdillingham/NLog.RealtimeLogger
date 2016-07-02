@@ -69,13 +69,13 @@ Bind this event handler to the ```LogArrived``` event:
 RealtimeLogger.LogArrived += AppendLog;
 ```
 
-Note that any number of handlers can be added.
+Generally you'll want to put the statement above in Main().  Note that any number of handlers can be added.
 
 That's it!  Your handler should be invoked each time a new log is added to the logger.
 
 ## RealtimeLoggerEventArgs
 
-The EventArgs for the ```LogArrived``` event are as follows:
+The properties of the event arguments ```RealtimeLoggerEventArgs``` for the ```LogArrived``` event are as follows:
 
 Property | Type | Description
 --- | --- | ---
@@ -102,3 +102,6 @@ A queue of log messages is provided and may be accessed using the ```LogHistory`
 
 The variable ```logHistoryLimit``` is used to initialize the value of the ```LogHistoryLimit``` property.  This can be changed by editing the class, or ```LogHistoryLimit``` can be changed programmatically at runtime.
 
+# Notes
+
+If the ```async``` option is used for NLog targets, the log event will not fire precisely in real time.  It would be a good idea to use the ```AsyncWrapper``` functionality described [here](https://github.com/nlog/NLog/wiki/AsyncWrapper-target) to limit the asynchronous execution to only those targets that need it.
