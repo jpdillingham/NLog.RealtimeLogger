@@ -1,4 +1,4 @@
-/*
+﻿/*
       █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀  ▀  ▀      ▀▀ 
       █
       █      ▄████████                                                                   ▄█
@@ -52,7 +52,7 @@ using NLog;
 using System;
 using System.Collections.Generic;
 
-namespace RealtimeLogger
+namespace Example
 {
     /// <summary>
     /// The RealtimeLogger class acts as a target for the NLog method logging target.  
