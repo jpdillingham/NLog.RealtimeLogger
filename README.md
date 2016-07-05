@@ -11,6 +11,7 @@ In your NLog configuration, add the following target:
 
 ```xml
 <target name="method" xsi:type="MethodCall" className="MyNamespace.RealtimeLogger, MyNamespace" methodName="AppendLog">
+  <parameter layout="${threadid}"/>
   <parameter layout="${longdate}"/>
   <parameter layout="${level}"/>
   <parameter layout="${logger}"/>
@@ -40,6 +41,7 @@ When you are finished, your NLog configuration should look something like this:
   >
   <targets>
     <target name="method" xsi:type="MethodCall" className="Example.RealtimeLogger, Example" methodName="AppendLog">
+	  <parameter layout="${threadid}"/>
       <parameter layout="${longdate}"/>
       <parameter layout="${level}"/>
       <parameter layout="${logger}"/>
@@ -79,12 +81,17 @@ The properties of the event arguments ```RealtimeLoggerEventArgs``` for the ```L
 
 Property | Type | Description
 --- | --- | ---
+ThreadID | int | The ID of the tread from which the log message originated.
 DateTime | DateTime | The DateTime corresponding to the instant the log was added to the logger.
 Level | LogLevel | The logging level used to add the log to the logger.
 Logger | string | The name of the logger.
 Message | string | The log message.
 
-Note that the constructor for ```RealtimeLoggerEventArgs``` parses the ```DateTime``` and ```LogLevel``` passed from NLog from strings.  If parsing fails the code will prefix the log message with an error before adding it to the log queue.
+Note that the constructor for ```RealtimeLoggerEventArgs``` parses the ```ThreadID```, ```DateTime``` and ```LogLevel``` passed from NLog from strings.  If parsing fails the code will prefix the log message with an error before adding it to the log queue.
+
+If the specified ```ThreadID``` value from NLog fails to be parsed, the ThreadID property will be set to ```0``` and the following message will be prepended to the log message:
+
+```[Invalid ThreadID; substituted with default]```
 
 If the specified ```DateTime``` value from NLog fails to be parsed, the DateTime property will be set to ```DateTime.Now``` and the following message will be prepended to the log message:
 
