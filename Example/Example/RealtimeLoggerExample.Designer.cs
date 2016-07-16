@@ -1,4 +1,4 @@
-﻿namespace Example
+﻿namespace RealtimeLogger
 {
     partial class RealtimeLoggerExample
     {

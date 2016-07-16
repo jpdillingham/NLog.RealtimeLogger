@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using NLog;
 
-namespace Example
+namespace RealtimeLogger
 {
     public partial class RealtimeLoggerExample : Form
     {

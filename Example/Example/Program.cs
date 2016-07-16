@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Example
+namespace RealtimeLogger
 {
     static class Program
     {
