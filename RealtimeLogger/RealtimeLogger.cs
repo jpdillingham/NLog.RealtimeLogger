@@ -73,13 +73,9 @@ namespace NLog.RealtimeLogger
         /// <summary>
         ///     Initializes a new instance of the <see cref="RealtimeLogger"/> class.
         /// </summary>
-        /// <remarks>
-        ///     Included for good measure.  Not invoked when member methods are invoked using reflection,
-        ///     such as through NLog's MethodCall target.
-        /// </remarks>
         static RealtimeLogger()
         {
-            Initialize();
+            LogHistory = new Queue<RealtimeLoggerEventArgs>();
         }
 
         #endregion
@@ -149,11 +145,6 @@ namespace NLog.RealtimeLogger
         /// <param name="message">The log message.</param>
         public static void AppendLog(string threadID, string dateTime, string level, string logger, string message)
         {
-            if (!initialized)
-            {
-                Initialize();
-            }
-
             RealtimeLoggerEventArgs eventArgs = new RealtimeLoggerEventArgs(threadID, dateTime, level, logger, message);
 
             AppendLogHistory(eventArgs);
@@ -171,19 +162,6 @@ namespace NLog.RealtimeLogger
         #region Private Methods
 
         #region Private Static Methods
-
-        /// <summary>
-        /// Initialize properties. 
-        /// </summary>
-        /// <remarks>
-        /// Used in place of a constructor, which is not invoked when member methods are invoked using reflection, 
-        /// such as through NLog's MethodCall target.
-        /// </remarks>
-        private static void Initialize()
-        {
-            LogHistory = new Queue<RealtimeLoggerEventArgs>();
-            initialized = true;
-        }
 
         /// <summary>
         /// Enqueues the supplied <see cref="RealtimeLoggerEventArgs"/> instance to the LogHistory queue.  
