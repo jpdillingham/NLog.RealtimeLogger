@@ -6,6 +6,12 @@
 
 A C# class that works in conjunction with the NLog 'MethodCall' logging target to expose log messages via an event in real time.  
 
+## Installation
+
+Install from the NuGet gallery GUI or with the Package Manager Console using the following command:
+
+```Install-Package NLog.RealtimeLogger```
+
 ## Usage
 
 ### NLog Configuration
