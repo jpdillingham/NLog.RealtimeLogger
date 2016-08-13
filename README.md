@@ -10,6 +10,8 @@ A C# class that works in conjunction with the NLog 'MethodCall' logging target t
 
 ### NLog Configuration
 
+Note that the following instructions are applicable if you aren't using the NuGet package (e.g. you compiled the code yourself, or inserted the source in your project).
+
 Copy the RealtimeLogger.cs file into your project and rename the namespace to fit your application.  In the example below we'll pretend we named it ```MyNamespace```.
 
 In your NLog configuration, add the following target:
@@ -58,10 +60,25 @@ When you are finished, your NLog configuration should look something like this:
   </rules>
 </nlog>
 ```
+#### NuGet Package Configuration
+
+If you downloaded and installed the library from NuGet, your target should match the following:
+
+```xml
+  <targets>
+    <target name="method" xsi:type="MethodCall" className="NLog.RealtimeLogger.RealtimeLogger, NLog.RealtimeLogger" methodName="AppendLog">
+	  <parameter layout="${threadid}"/>
+      <parameter layout="${longdate}"/>
+      <parameter layout="${level}"/>
+      <parameter layout="${logger}"/>
+      <parameter layout="${message} ${exception:format=tostring}"/>
+    </target>
+  </targets>
+```
 
 ### Event Handler
 
-Next, create a method that can be bound to the RealtimeLogger's ```LogArrived``` event, like so:
+Next, create a method that can be bound to the RealtimeLogger's ```LogAppended``` event, like so:
 
 ```c#
 private void AppendLog(object sender, RealtimeLoggerEventArgs e)
@@ -70,10 +87,10 @@ private void AppendLog(object sender, RealtimeLoggerEventArgs e)
 }
 ```
 
-Bind this event handler to the ```LogArrived``` event:
+Bind this event handler to the ```LogAppended``` event:
 
 ```c#
-RealtimeLogger.LogArrived += AppendLog;
+RealtimeLogger.LogAppended += AppendLog;
 ```
 
 Generally you'll want to put the statement above in Main().  Note that any number of handlers can be added.
@@ -82,7 +99,7 @@ That's it!  Your handler should be invoked each time a new log is added to the l
 
 ## RealtimeLoggerEventArgs
 
-The properties of the event arguments ```RealtimeLoggerEventArgs``` for the ```LogArrived``` event are as follows:
+The properties of the event arguments ```RealtimeLoggerEventArgs``` for the ```LogAppended``` event are as follows:
 
 Property | Type | Description
 --- | --- | ---
