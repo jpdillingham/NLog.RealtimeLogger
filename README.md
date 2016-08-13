@@ -1,4 +1,7 @@
 # RealtimeLogger
+
+[![Build status](https://ci.appveyor.com/api/projects/status/f0600g4uqusbkvah?svg=true)](https://ci.appveyor.com/project/jpdillingham/realtimelogger)
+
 A C# class that works in conjunction with the NLog 'MethodCall' logging target to expose log messages via an event in real time.  
 
 ## Usage

@@ -10,11 +10,19 @@
       █     ███    ███   ██   █    ██   ██ ██▌    ▄     ██    ██   ██  ██  ██   ██   █  ███▌    ▄ ██    ██   ██    ██   ██    ██   ██   █    ██  ██ 
       █     ███    ███   ███████   ██   █▀ ████▄▄██    ▄██▀   █     █  ██  █    ███████ █████▄▄██  ██████    ██████▀    ██████▀    ███████   ██  ██ 
       █
+      █      ▄████████                                        ▄████████                               
+      █     ███    ███                                        ███    ███                              
+      █     ███    █▀   █    █     ▄█████ ██▄▄▄▄      ██      ███    ███    █████    ▄████▄    ▄█████ 
+      █    ▄███▄▄▄     ██    ██   ██   █  ██▀▀▀█▄ ▀███████▄   ███    ███   ██  ██   ██    ▀    ██  ▀  
+      █   ▀▀███▀▀▀     ██    ██  ▄██▄▄    ██   ██     ██  ▀ ▀███████████  ▄██▄▄█▀  ▄██         ██     
+      █     ███    █▄  ██    ██ ▀▀██▀▀    ██   ██     ██      ███    ███ ▀███████ ▀▀██ ███▄  ▀███████ 
+      █     ███    ███  █▄  ▄█    ██   █  ██   ██     ██      ███    ███   ██  ██   ██    ██    ▄  ██ 
+      █     ██████████   ▀██▀     ███████  █   █     ▄██▀     ███    █▀    ██  ██   ██████▀   ▄████▀  
+      █
  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄  ▄▄ ▄▄   ▄▄▄▄ ▄▄     ▄▄     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄ ▄ 
  █████████████████████████████████████████████████████████████ ███████████████ ██  ██ ██   ████ ██     ██     ████████████████ █ █ 
       ▄  
-      █  The RealtimeLogger class works in conjunction with the NLog 'MethodCall' logging target to expose log messages via an event
-      █  in real time.  
+      █  Represents the EventArgs associated with the RealtimeLogger class' LogAppended event.
       █
       █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀ ▀▀▀     ▀▀               ▀   
       █  The MIT License (MIT)
@@ -49,171 +57,107 @@
                                                                                                  ▀████▀   
                                                                                                    ▀▀                              */
 using System;
-using System.Collections.Generic;
 
 namespace NLog.RealtimeLogger
 {
     /// <summary>
-    ///     The <see cref="RealtimeLogger"/> class acts as a target for the NLog method logging target; it
-    ///     fires the <see cref="LogAppended"/> event when new log messages are created by NLog.
+    ///     Represents the EventArgs associated with the <see cref="RealtimeLogger"/> class' <see cref="RealtimeLogger.LogAppended"/> event.
     /// </summary>
-    public class RealtimeLogger
+    public class RealtimeLoggerEventArgs : EventArgs
     {
-        #region Fields
-
-        /// <summary>
-        ///     Initialization status of the class.
-        /// </summary>
-        private static bool initialized = false;
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="RealtimeLogger"/> class.
-        /// </summary>
-        /// <remarks>
-        ///     Included for good measure.  Not invoked when member methods are invoked using reflection,
-        ///     such as through NLog's MethodCall target.
-        /// </remarks>
-        public RealtimeLogger()
-        {
-            Initialize();
-        }
-
-        #endregion
-
-        #region Events
-
-        /// <summary>
-        ///     The Changed event is fired when new log messages are created by NLog.
-        /// </summary>
-        public static event EventHandler<RealtimeLoggerEventArgs> LogAppended;
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        ///     Gets a queue containing the newest log messages, up to the LogHistoryLimit.
-        /// </summary>
-        public static Queue<RealtimeLoggerEventArgs> LogHistory { get; private set; }
-
-        /// <summary>
-        ///     Gets the maximum number of log messages to store in the log history queue.
-        /// </summary>
-        /// <remarks>
-        ///     If the value is reduced while the log is populated, the length of the LogHistory queue
-        ///     will be reduced to the desired value upon the addition of the next log.
-        /// </remarks>
-        /// <exception cref="FormatException">Thrown when the value specified in the LogHistoryLimit NLog configuration variable can not be parsed to an integer.</exception>
-        public static int LogHistoryLimit
-        {
-            get
-            {
-                int logHistoryLimit = 300;
-
-                // retrieve the value from the NLog configuration variable "RealtimeLogger.LogHistoryLimit", if it exists.
-                if (LogManager.Configuration != default(Config.LoggingConfiguration) && LogManager.Configuration.Variables.ContainsKey("RealtimeLogger.LogHistoryLimit"))
-                {
-                    string value = LogManager.Configuration.Variables["RealtimeLogger.LogHistoryLimit"].Text;
-
-                    // try to parse an integer from the specified value.  throw a FormatException if the parse fails.
-                    if (!int.TryParse(value, out logHistoryLimit))
-                    {
-                        throw new FormatException("The configured value for RealtimeLogger.LogHistoryLimit ('" + value + "') is invalid.  The value must be an integer.");
-                    }
-                }
-
-                return logHistoryLimit;
-            }
-        }
-
-        #endregion
-
-        #region Methods
-
-        #region Public Methods
-
-        #region Public Static Methods
-
-        /// <summary>
-        ///     Called by the NLog method logging target, this method fires the Changed event with the thread ID, timestamp, 
-        ///     level, logger and message associated with the new log message.
+        ///     Initializes a new instance of the <see cref="RealtimeLoggerEventArgs"/> class with the supplied parameters.
         /// </summary>
         /// <param name="threadID">The ID of the thread that originated the log message.</param>
         /// <param name="dateTime">The timestamp of the log message in long date format.</param>
         /// <param name="level">The level of the log message.</param>
         /// <param name="logger">The logger instance that generated the message.</param>
         /// <param name="message">The log message.</param>
-        public static void AppendLog(string threadID, string dateTime, string level, string logger, string message)
+        public RealtimeLoggerEventArgs(string threadID, string dateTime, string level, string logger, string message)
         {
-            if (!initialized)
+            // set up an empty prefix in case we need to append warnings
+            string prefix = string.Empty;
+
+            // parse the thread ID
+            int parsedThreadID;
+
+            if (int.TryParse(threadID, out parsedThreadID))
             {
-                Initialize();
+                this.ThreadID = parsedThreadID;
+            }
+            else
+            {
+                this.ThreadID = 1;
+                prefix += "[Invalid ThreadID; substituted with default]";
             }
 
-            RealtimeLoggerEventArgs eventArgs = new RealtimeLoggerEventArgs(threadID, dateTime, level, logger, message);
+            // ensure the supplied long date string is a valid DateTime
+            // substitute with the current timestamp if parse fails
+            DateTime parsedDateTime;
 
-            AppendLogHistory(eventArgs);
-
-            if (LogAppended != null)
+            if (DateTime.TryParse(dateTime, out parsedDateTime))
             {
-                LogAppended(default(object), eventArgs);
+                this.DateTime = parsedDateTime;
             }
+            else
+            {
+                this.DateTime = DateTime.Now;
+                prefix += "[Invalid DateTime; substituted with DateTime.Now]";
+            }
+
+            // determine the LogLevel using the supplied level string.
+            // if the level isn't found or level is null, substitute LogLevel.Info
+            try
+            {
+                this.Level = LogLevel.FromString(level);
+            }
+            catch (Exception ex)
+            {
+                if ((ex is ArgumentException) || (ex is ArgumentNullException))
+                {
+                    this.Level = LogLevel.Info;
+                    prefix += "[Invalid LogLevel; substituted with LogLevel.Info]";
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            this.Logger = logger;
+            this.Message = prefix + message;
         }
 
         #endregion
 
-        #endregion
-
-        #region Private Methods
-
-        #region Private Static Methods
+        #region Properties
 
         /// <summary>
-        /// Initialize properties. 
+        ///     Gets the ID of the thread that originated the log message.
         /// </summary>
-        /// <remarks>
-        /// Used in place of a constructor, which is not invoked when member methods are invoked using reflection, 
-        /// such as through NLog's MethodCall target.
-        /// </remarks>
-        private static void Initialize()
-        {
-            LogHistory = new Queue<RealtimeLoggerEventArgs>();
-            initialized = true;
-        }
+        public int ThreadID { get; private set; }
 
         /// <summary>
-        /// Enqueues the supplied <see cref="RealtimeLoggerEventArgs"/> instance to the LogHistory queue.  
-        /// If the queue exceeds 200 entries, the oldest log is first de-queued before the new log is enqueued.
+        ///     Gets the timestamp of the log message.
         /// </summary>
-        /// <param name="eventArgs">The event args instance to enqueue.</param>
-        private static void AppendLogHistory(RealtimeLoggerEventArgs eventArgs)
-        {
-            LogHistory.Enqueue(eventArgs);
-
-            if (LogHistory.Count > LogHistoryLimit)
-            {
-                PruneLogHistory();
-            }
-        }
+        public DateTime DateTime { get; private set; }
 
         /// <summary>
-        /// Repeatedly De-queues logs from the LogHistory queue until the queue length matches LogHistoryLimit.
+        ///     Gets the logging level of the log message.
         /// </summary>
-        private static void PruneLogHistory()
-        {
-            while (LogHistory.Count > LogHistoryLimit)
-            {
-                LogHistory.Dequeue();
-            }
-        }
+        public LogLevel Level { get; private set; }
 
-        #endregion
+        /// <summary>
+        ///     Gets the name of the logger that generated the log message.
+        /// </summary>
+        public string Logger { get; private set; }
 
-        #endregion
+        /// <summary>
+        ///     Gets the log message.
+        /// </summary>
+        public string Message { get; private set; }
 
         #endregion
     }

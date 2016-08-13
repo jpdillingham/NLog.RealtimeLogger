@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="RealtimeLoggerExample.Designer.cs">
       <DependentUpon>RealtimeLoggerExample.cs</DependentUpon>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,9 @@
-﻿namespace RealtimeLogger
+﻿namespace NLog.RealtimeLogger
 {
-    partial class RealtimeLoggerExample
+    /// <summary>
+    ///     Partial class for the application form.
+    /// </summary>
+    public partial class RealtimeLoggerExample
     {
         /// <summary>
         /// Required designer variable.
@@ -17,6 +20,7 @@
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 

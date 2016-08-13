@@ -1,45 +1,49 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Windows.Forms;
-using NLog;
 
-namespace RealtimeLogger
+namespace NLog.RealtimeLogger
 {
+    /// <summary>
+    ///     Represents the application form.
+    /// </summary>
     public partial class RealtimeLoggerExample : Form
     {
         /// <summary>
-        /// The logger for this example.
+        ///     The logger for this example.
         /// </summary>
         private static Logger logger = LogManager.GetLogger("E");
 
         /// <summary>
-        /// The form constructor.
+        ///     Initializes a new instance of the <see cref="RealtimeLoggerExample"/> class.
         /// </summary>
         public RealtimeLoggerExample()
         {
             InitializeComponent();
 
             // bind the AppendLog method in this class to the 
-            RealtimeLogger.LogArrived += AppendLog;
+            RealtimeLogger.LogAppended += AppendLog;
         }
 
         /// <summary>
-        /// The event handler for the "Add Log" button.
+        ///     The event handler for the "Add Log" button.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed.")]
         private void btnAddLog_Click(object sender, EventArgs e)
         {
             logger.Info("Hello World!");
         }
 
         /// <summary>
-        /// Fired when the RealtimeLogger receives a new log message.
+        ///     Fired when the <see cref="RealtimeLogger"/>  receives a new log message.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private void AppendLog(object sender, RealtimeLoggerEventArgs e)
         {
-            //threadsafe
+            // threadsafe
             this.Invoke((MethodInvoker)delegate
             {
                 string msg = e.DateTime + " | " + e.Message;
@@ -48,10 +52,10 @@ namespace RealtimeLogger
         }
 
         /// <summary>
-        /// The event handler for the form load event.
+        ///     The event handler for the form load event.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
         private void RealtimeLoggerExample_Load(object sender, EventArgs e)
         {
             logger.Info("Form loaded.");

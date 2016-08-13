@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace RealtimeLogger
+namespace NLog.RealtimeLogger
 {
-    static class Program
+    /// <summary>
+    ///     Represents the Example application.
+    /// </summary>
+    public static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
