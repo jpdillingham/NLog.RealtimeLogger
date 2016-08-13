@@ -57,7 +57,7 @@ namespace NLog.RealtimeLogger
     ///     The <see cref="RealtimeLogger"/> class acts as a target for the NLog method logging target; it
     ///     fires the <see cref="LogAppended"/> event when new log messages are created by NLog.
     /// </summary>
-    public class RealtimeLogger
+    public static class RealtimeLogger
     {
         #region Fields
 
@@ -77,7 +77,7 @@ namespace NLog.RealtimeLogger
         ///     Included for good measure.  Not invoked when member methods are invoked using reflection,
         ///     such as through NLog's MethodCall target.
         /// </remarks>
-        public RealtimeLogger()
+        static RealtimeLogger()
         {
             Initialize();
         }

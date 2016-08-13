@@ -120,10 +120,6 @@ namespace NLog.RealtimeLogger
                     this.Level = LogLevel.Info;
                     prefix += "[Invalid LogLevel; substituted with LogLevel.Info]";
                 }
-                else
-                {
-                    throw;
-                }
             }
 
             this.Logger = logger;

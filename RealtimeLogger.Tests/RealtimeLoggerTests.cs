@@ -64,6 +64,36 @@ namespace NLog.RealtimeLogger.Tests
         }
 
         /// <summary>
+        ///     Tests <see cref="RealtimeLogger.AppendLog(string, string, string, string, string)"/> with a subscriber attached.
+        /// </summary>
+        [Fact]
+        public void AppendLogSubscription()
+        {
+            RealtimeLogger.LogAppended += EventHandler;
+            RealtimeLogger.AppendLog("2", "8/12/2016 10:31", "Debug", "Test", "Hello World!");
+        }
+
+        /// <summary>
+        ///     Tests <see cref="RealtimeLogger.AppendLog(string, string, string, string, string)"/> with enough logs to force pruning 
+        ///     of the log history.
+        /// </summary>
+        [Fact]
+        public void AppendLogsToForcePrune()
+        {
+            SetVariable("RealtimeLogger.LogHistoryLimit", "5");
+
+            Assert.Equal(5, RealtimeLogger.LogHistoryLimit);
+
+            for (int i = 0; i < 10; i++)
+            {
+                RealtimeLogger.AppendLog("test", "test", "test", "test", "test");
+            }
+
+            Assert.Equal(5, RealtimeLogger.LogHistory.Count);
+        }
+
+
+        /// <summary>
         ///     Tests the constructor of <see cref="RealtimeLoggerEventArgs"/>.
         /// </summary>
         [Fact]
@@ -112,6 +142,16 @@ namespace NLog.RealtimeLogger.Tests
                     LogManager.Configuration.Variables.Add(variable, new Layouts.SimpleLayout(value));
                 }
             }
+        }
+
+        /// <summary>
+        ///     Dummy LogAppended event handler.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event parameters.</param>
+        private void EventHandler(object sender, RealtimeLoggerEventArgs e)
+        {
+
         }
     }
 }
