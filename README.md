@@ -1,4 +1,4 @@
-# RealtimeLogger
+# RealtimeLogger - An NLog Companion for Real-Time Logging
 
 [![Build status](https://ci.appveyor.com/api/projects/status/f0600g4uqusbkvah?svg=true)](https://ci.appveyor.com/project/jpdillingham/realtimelogger)
 [![codecov](https://codecov.io/gh/jpdillingham/RealtimeLogger/branch/master/graph/badge.svg)](https://codecov.io/gh/jpdillingham/RealtimeLogger)

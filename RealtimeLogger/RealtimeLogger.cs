@@ -59,15 +59,6 @@ namespace NLog.RealtimeLogger
     /// </summary>
     public static class RealtimeLogger
     {
-        #region Fields
-
-        /// <summary>
-        ///     Initialization status of the class.
-        /// </summary>
-        private static bool initialized = false;
-
-        #endregion
-
         #region Constructors
 
         /// <summary>
