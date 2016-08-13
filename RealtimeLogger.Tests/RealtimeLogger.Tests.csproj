@@ -7,8 +7,8 @@
     <ProjectGuid>{FA43898A-3C7A-4172-BCDD-548AF0B5CFFE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RealtimeLogger.Tests</RootNamespace>
-    <AssemblyName>RealtimeLogger.Tests</AssemblyName>
+    <RootNamespace>NLog.RealtimeLogger.Tests</RootNamespace>
+    <AssemblyName>NLog.RealtimeLogger.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

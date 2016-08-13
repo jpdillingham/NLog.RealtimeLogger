@@ -115,3 +115,11 @@ The variable ```logHistoryLimit``` is used to initialize the value of the ```Log
 # Notes
 
 If the ```async``` option is used for the logging target the log event will not fire precisely in real time.  It would be a good idea to use the ```AsyncWrapper``` functionality described [here](https://github.com/nlog/NLog/wiki/AsyncWrapper-target) to limit the asynchronous execution to only those targets that need it, rather than adding the ```async``` attribute to the ```<targets>``` node of the config file.
+
+## configuration
+
+Create and modify the NLog configuration variable "RealtimeLogger.LogHistoryLimit" to change the number of logs saved in the log history.  The default is 300.
+
+```xml
+  <variable name="RealtimeLogger.LogHistoryLimit" value="300"/>
+```
