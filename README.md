@@ -3,7 +3,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/c2ddr5i0wb15hl82?svg=true)](https://ci.appveyor.com/project/jpdillingham/nlog-realtimelogger)
 [![codecov](https://codecov.io/gh/jpdillingham/NLog.RealtimeLogger/branch/master/graph/badge.svg)](https://codecov.io/gh/jpdillingham/NLog.RealtimeLogger)
 [![NuGet](https://img.shields.io/nuget/v/NLog.RealtimeLogger.svg)](https://www.nuget.org/packages/NLog.RealtimeLogger)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/jpdillingham/Utility.BigFont/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/jpdillingham/NLog.RealtimeLogger/blob/master/LICENSE)
 
 A C# class that works in conjunction with the NLog 'MethodCall' logging target to expose log messages via an event in real time.  
 
