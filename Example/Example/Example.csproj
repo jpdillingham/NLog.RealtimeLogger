@@ -92,9 +92,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\RealtimeLogger\RealtimeLogger.csproj">
+    <ProjectReference Include="..\..\NLog.RealtimeLogger\NLog.RealtimeLogger.csproj">
       <Project>{eddef996-f0b1-493a-ad8a-21de858c4945}</Project>
-      <Name>RealtimeLogger</Name>
+      <Name>NLog.RealtimeLogger</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

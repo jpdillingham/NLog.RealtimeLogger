@@ -2,10 +2,10 @@ version: 0.9.0.{build}
 before_build:
 - cmd: nuget restore
 build:
-  project: RealtimeLogger.sln
+  project: NLog.RealtimeLogger.sln
   verbosity: minimal
 test_script:
-- .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"C:\projects\RealtimeLogger\RealtimeLogger.Tests\bin\Debug\NLog.RealtimeLogger.Tests.dll -noshadow -appveyor" -returntargetcode -filter:"+[NLog.RealtimeLogger*]*" -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\RealtimeLogger_coverage.xml
+- .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:"C:\projects\NLog-RealtimeLogger\NLog.RealtimeLogger.Tests\bin\Debug\NLog.RealtimeLogger.Tests.dll -noshadow -appveyor" -returntargetcode -filter:"+[NLog.RealtimeLogger*]*" -excludebyattribute:*.ExcludeFromCodeCoverage* -hideskipped:All -output:.\NLog.RealtimeLogger_coverage.xml
 - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
 - pip install codecov
-- codecov -f "RealtimeLogger_coverage.xml"
+- codecov -f "NLog.RealtimeLogger_coverage.xml"
