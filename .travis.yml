@@ -1,0 +1,10 @@
+os:
+  - linux
+  - osx
+language: csharp
+solution: NLog.RealtimeLogger.sln
+install:
+  - nuget restore NLog.RealtimeLogger.sln
+script:
+  - xbuild /p:Configuration=Release NLog.RealtimeLogger.sln
+  - mono ./packages/xunit.runner.console.2.1.0/tools/xunit.console.exe ./NLog.RealtimeLogger.Tests/bin/Release/NLog.RealtimeLogger.Tests.dll
