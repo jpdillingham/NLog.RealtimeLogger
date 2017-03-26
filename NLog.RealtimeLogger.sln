@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLog.RealtimeLogger", "NLog.RealtimeLogger\NLog.RealtimeLogger.csproj", "{EDDEF996-F0B1-493A-AD8A-21DE858C4945}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example\Example.csproj", "{F787DE17-F4C0-4EF5-AFD3-4EB389A356C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples\Examples.csproj", "{F787DE17-F4C0-4EF5-AFD3-4EB389A356C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NLog.RealtimeLogger.Tests", "NLog.RealtimeLogger.Tests\NLog.RealtimeLogger.Tests.csproj", "{FA43898A-3C7A-4172-BCDD-548AF0B5CFFE}"
 EndProject
