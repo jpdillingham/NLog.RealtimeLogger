@@ -1,4 +1,59 @@
-﻿using System;
+﻿/*
+      █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀  ▀  ▀      ▀▀
+      █
+      █      ▄████████                                                                   ▄█
+      █     ███    ███                                                                  ███
+      █    ▄███▄▄▄▄██▀    ▄█████   ▄█████   █           ██     █     ▄▄██▄▄▄     ▄█████ ███        ██████     ▄████▄     ▄████▄     ▄█████    █████
+      █   ▀▀███▀▀▀▀▀     ██   █    ██   ██ ██       ▀███████▄ ██   ▄█▀▀██▀▀█▄   ██   █  ███       ██    ██   ██    ▀    ██    ▀    ██   █    ██  ██
+      █   ▀███████████  ▄██▄▄      ██   ██ ██           ██  ▀ ██▌  ██  ██  ██  ▄██▄▄    ███       ██    ██  ▄██        ▄██        ▄██▄▄     ▄██▄▄█▀
+      █     ███    ███ ▀▀██▀▀    ▀████████ ██           ██    ██   ██  ██  ██ ▀▀██▀▀    ███       ██    ██ ▀▀██ ███▄  ▀▀██ ███▄  ▀▀██▀▀    ▀███████
+      █     ███    ███   ██   █    ██   ██ ██▌    ▄     ██    ██   ██  ██  ██   ██   █  ███▌    ▄ ██    ██   ██    ██   ██    ██   ██   █    ██  ██
+      █     ███    ███   ███████   ██   █▀ ████▄▄██    ▄██▀   █     █  ██  █    ███████ █████▄▄██  ██████    ██████▀    ██████▀    ███████   ██  ██
+      █
+      █       ███
+      █   ▀█████████▄
+      █      ▀███▀▀██    ▄█████   ▄█████     ██      ▄█████
+      █       ███   ▀   ██   █    ██  ▀  ▀███████▄   ██  ▀
+      █       ███      ▄██▄▄      ██         ██  ▀   ██
+      █       ███     ▀▀██▀▀    ▀███████     ██    ▀███████
+      █       ███       ██   █     ▄  ██     ██       ▄  ██
+      █      ▄████▀     ███████  ▄████▀     ▄██▀    ▄████▀
+      █
+ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄  ▄▄ ▄▄   ▄▄▄▄ ▄▄     ▄▄     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄ ▄
+ █████████████████████████████████████████████████████████████ ███████████████ ██  ██ ██   ████ ██     ██     ████████████████ █ █
+      ▄
+      █  Unit tests for the RealtimeLogger class.
+      █
+      █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀▀ ▀ ▀▀▀     ▀▀               ▀
+      █  The MIT License (MIT)
+      █
+      █  Copyright (c) 2016-2017 JP Dillingham (jp@dillingham.ws)
+      █
+      █  Permission is hereby granted, free of charge, to any person obtaining a copy
+      █  of this software and associated documentation files (the "Software"), to deal
+      █  in the Software without restriction, including without limitation the rights
+      █  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+      █  copies of the Software, and to permit persons to whom the Software is
+      █  furnished to do so, subject to the following conditions:
+      █
+      █  The above copyright notice and this permission notice shall be included in all
+      █  copies or substantial portions of the Software.
+      █
+      █  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      █  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      █  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+      █  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      █  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      █  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+      █  SOFTWARE.
+      █
+      ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀  ▀▀ ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀██
+                                                                                                   ██
+                                                                                               ▀█▄ ██ ▄█▀
+                                                                                                 ▀████▀
+                                                                                                   ▀▀                              */
+
+using System;
 using NLog.Config;
 using NLog.Targets;
 using Xunit;
@@ -6,12 +61,14 @@ using Xunit;
 namespace NLog.RealtimeLogger.Tests
 {
     /// <summary>
-    ///     Tests for the <see cref="RealtimeLogger"/> class. 
+    ///     Tests for the <see cref="RealtimeLogger"/> class.
     /// </summary>
     public class RealtimeLoggerTests
     {
+        #region Public Constructors
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="RealtimeLoggerTests"/> class. 
+        ///     Initializes a new instance of the <see cref="RealtimeLoggerTests"/> class.
         /// </summary>
         public RealtimeLoggerTests()
         {
@@ -24,28 +81,9 @@ namespace NLog.RealtimeLogger.Tests
             LogManager.Configuration = config;
         }
 
-        /// <summary>
-        ///     Tests the <see cref="RealtimeLogger.LogHistoryLimit"/> property.
-        /// </summary>
-        [Fact]
-        public void LogHistoryLimit()
-        {
-            SetVariable("RealtimeLogger.LogHistoryLimit", "500");
-            Assert.Equal(500, RealtimeLogger.LogHistoryLimit);
-        }
+        #endregion Public Constructors
 
-        /// <summary>
-        ///     Tests the <see cref="RealtimeLogger.LogHistoryLimit"/> property with a known bad value.
-        /// </summary>
-        [Fact]
-        public void LogHistoryLimitBad()
-        {
-            SetVariable("RealtimeLogger.LogHistoryLimit", "one");
-
-            int val;
-
-            Assert.Throws(typeof(FormatException), () => val = RealtimeLogger.LogHistoryLimit);
-        }
+        #region Public Methods
 
         /// <summary>
         ///     Tests <see cref="RealtimeLogger.AppendLog(string, string, string, string, string)"/>.
@@ -64,18 +102,8 @@ namespace NLog.RealtimeLogger.Tests
         }
 
         /// <summary>
-        ///     Tests <see cref="RealtimeLogger.AppendLog(string, string, string, string, string)"/> with a subscriber attached.
-        /// </summary>
-        [Fact]
-        public void AppendLogSubscription()
-        {
-            RealtimeLogger.LogAppended += EventHandler;
-            RealtimeLogger.AppendLog("2", "8/12/2016 10:31", "Debug", "Test", "Hello World!");
-        }
-
-        /// <summary>
-        ///     Tests <see cref="RealtimeLogger.AppendLog(string, string, string, string, string)"/> with enough logs to force pruning 
-        ///     of the log history.
+        ///     Tests <see cref="RealtimeLogger.AppendLog(string, string, string, string, string)"/> with enough logs to force
+        ///     pruning of the log history.
         /// </summary>
         [Fact]
         public void AppendLogsToForcePrune()
@@ -92,6 +120,15 @@ namespace NLog.RealtimeLogger.Tests
             Assert.Equal(5, RealtimeLogger.LogHistory.Count);
         }
 
+        /// <summary>
+        ///     Tests <see cref="RealtimeLogger.AppendLog(string, string, string, string, string)"/> with a subscriber attached.
+        /// </summary>
+        [Fact]
+        public void AppendLogSubscription()
+        {
+            RealtimeLogger.LogAppended += EventHandler;
+            RealtimeLogger.AppendLog("2", "8/12/2016 10:31", "Debug", "Test", "Hello World!");
+        }
 
         /// <summary>
         ///     Tests the constructor of <see cref="RealtimeLoggerEventArgs"/>.
@@ -125,6 +162,42 @@ namespace NLog.RealtimeLogger.Tests
         }
 
         /// <summary>
+        ///     Tests the <see cref="RealtimeLogger.LogHistoryLimit"/> property.
+        /// </summary>
+        [Fact]
+        public void LogHistoryLimit()
+        {
+            SetVariable("RealtimeLogger.LogHistoryLimit", "500");
+            Assert.Equal(500, RealtimeLogger.LogHistoryLimit);
+        }
+
+        /// <summary>
+        ///     Tests the <see cref="RealtimeLogger.LogHistoryLimit"/> property with a known bad value.
+        /// </summary>
+        [Fact]
+        public void LogHistoryLimitBad()
+        {
+            SetVariable("RealtimeLogger.LogHistoryLimit", "one");
+
+            int val;
+
+            Assert.Throws(typeof(FormatException), () => val = RealtimeLogger.LogHistoryLimit);
+        }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        /// <summary>
+        ///     Dummy LogAppended event handler.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event parameters.</param>
+        private void EventHandler(object sender, RealtimeLoggerEventArgs e)
+        {
+        }
+
+        /// <summary>
         ///     Sets the specified variable in the NLog configuration to the specified value.
         /// </summary>
         /// <param name="variable">The variable to set.</param>
@@ -144,14 +217,6 @@ namespace NLog.RealtimeLogger.Tests
             }
         }
 
-        /// <summary>
-        ///     Dummy LogAppended event handler.
-        /// </summary>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The event parameters.</param>
-        private void EventHandler(object sender, RealtimeLoggerEventArgs e)
-        {
-
-        }
+        #endregion Private Methods
     }
 }
