@@ -60,7 +60,7 @@ namespace NLog.RealtimeLogger
     /// </summary>
     public static class RealtimeLogger
     {
-        #region Constructors
+        #region Public Constructors
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="RealtimeLogger"/> class.
@@ -70,18 +70,18 @@ namespace NLog.RealtimeLogger
             LogHistory = new Queue<RealtimeLoggerEventArgs>();
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Events
+        #region Public Events
 
         /// <summary>
         ///     The Changed event is fired when new log messages are created by NLog.
         /// </summary>
         public static event EventHandler<RealtimeLoggerEventArgs> LogAppended;
 
-        #endregion Events
+        #endregion Public Events
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets a queue containing the newest log messages, up to the LogHistoryLimit.
@@ -120,13 +120,9 @@ namespace NLog.RealtimeLogger
             }
         }
 
-        #endregion Properties
-
-        #region Methods
+        #endregion Public Properties
 
         #region Public Methods
-
-        #region Public Static Methods
 
         /// <summary>
         ///     Called by the NLog method logging target, this method fires the Changed event with the thread ID, timestamp, level,
@@ -149,13 +145,9 @@ namespace NLog.RealtimeLogger
             }
         }
 
-        #endregion Public Static Methods
-
         #endregion Public Methods
 
         #region Private Methods
-
-        #region Private Static Methods
 
         /// <summary>
         ///     Enqueues the supplied <see cref="RealtimeLoggerEventArgs"/> instance to the LogHistory queue. If the queue exceeds
@@ -183,10 +175,6 @@ namespace NLog.RealtimeLogger
             }
         }
 
-        #endregion Private Static Methods
-
         #endregion Private Methods
-
-        #endregion Methods
     }
 }

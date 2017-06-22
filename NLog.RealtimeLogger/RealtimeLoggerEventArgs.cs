@@ -67,7 +67,7 @@ namespace NLog.RealtimeLogger
     /// </summary>
     public class RealtimeLoggerEventArgs : EventArgs
     {
-        #region Constructors
+        #region Public Constructors
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="RealtimeLoggerEventArgs"/> class with the supplied parameters.
@@ -126,9 +126,9 @@ namespace NLog.RealtimeLogger
             this.Message = prefix + message;
         }
 
-        #endregion Constructors
+        #endregion Public Constructors
 
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         ///     Gets the timestamp of the log message.
@@ -155,6 +155,6 @@ namespace NLog.RealtimeLogger
         /// </summary>
         public int ThreadID { get; private set; }
 
-        #endregion Properties
+        #endregion Public Properties
     }
 }

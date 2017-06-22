@@ -8,8 +8,10 @@ namespace NLog.RealtimeLogger
     /// </summary>
     public static class Program
     {
+        #region Public Methods
+
         /// <summary>
-        /// The main entry point for the application.
+        ///     The main entry point for the application.
         /// </summary>
         [STAThread]
         public static void Main()
@@ -18,5 +20,7 @@ namespace NLog.RealtimeLogger
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new RealtimeLoggerExample());
         }
+
+        #endregion Public Methods
     }
 }

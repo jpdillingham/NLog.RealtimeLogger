@@ -9,10 +9,16 @@ namespace NLog.RealtimeLogger
     /// </summary>
     public partial class RealtimeLoggerExample : Form
     {
+        #region Private Fields
+
         /// <summary>
         ///     The logger for this example.
         /// </summary>
         private static Logger logger = LogManager.GetLogger("E");
+
+        #endregion Private Fields
+
+        #region Public Constructors
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="RealtimeLoggerExample"/> class.
@@ -21,23 +27,16 @@ namespace NLog.RealtimeLogger
         {
             InitializeComponent();
 
-            // bind the AppendLog method in this class to the 
+            // bind the AppendLog method in this class to the
             RealtimeLogger.LogAppended += AppendLog;
         }
 
-        /// <summary>
-        ///     The event handler for the "Add Log" button.
-        /// </summary>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The event arguments.</param>
-        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed.")]
-        private void btnAddLog_Click(object sender, EventArgs e)
-        {
-            logger.Info("Hello World!");
-        }
+        #endregion Public Constructors
+
+        #region Private Methods
 
         /// <summary>
-        ///     Fired when the <see cref="RealtimeLogger"/>  receives a new log message.
+        ///     Fired when the <see cref="RealtimeLogger"/> receives a new log message.
         /// </summary>
         /// <param name="sender">The event sender.</param>
         /// <param name="e">The event arguments.</param>
@@ -52,6 +51,17 @@ namespace NLog.RealtimeLogger
         }
 
         /// <summary>
+        ///     The event handler for the "Add Log" button.
+        /// </summary>
+        /// <param name="sender">The event sender.</param>
+        /// <param name="e">The event arguments.</param>
+        [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Reviewed.")]
+        private void btnAddLog_Click(object sender, EventArgs e)
+        {
+            logger.Info("Hello World!");
+        }
+
+        /// <summary>
         ///     The event handler for the form load event.
         /// </summary>
         /// <param name="sender">The event sender.</param>
@@ -60,5 +70,7 @@ namespace NLog.RealtimeLogger
         {
             logger.Info("Form loaded.");
         }
+
+        #endregion Private Methods
     }
 }
